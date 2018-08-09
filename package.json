@@ -22,8 +22,8 @@
   },
   "scripts": {
     "webpack": "webpack",
-    "dev": "npm run webpack && nodemon --exec babel-node -- bin/www",
-    "start": "babel-node -- bin/www"
+    "start": "npm run webpack && nodemon --exec babel-node -- bin/www",
+    "prod": "babel-node -- bin/www"
   }
 
 }
