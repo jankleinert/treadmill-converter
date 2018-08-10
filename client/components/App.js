@@ -4,6 +4,7 @@ import axios from 'axios';
 import '../css/App.css';
 import MphPanel from './MphPanel';
 import KphPanel from './KphPanel';
+import MilePacePanel from './MilePacePanel';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -11,19 +12,26 @@ export default class App extends React.Component {
     this.state = {
       mph: (6).toFixed(1),
       kph: (1.609344 * 6.0).toFixed(1),
+      impMin: 10,
+      impSec: 0
     };
   }
 
   
 
   handleClick(direction, unit) {
-    var newMph, newKph;
+    var newMph, newKph, newImpMinutes, newImpSeconds;
     if (direction.indexOf("up") !== -1) { // up button was clicked
       if (unit.indexOf("mph") !== -1) { // increment mph
         newMph = halfStepIncrement(this.state.mph);
+        newImpMinutes = Math.floor(60/newMph);
+        newImpSeconds = ((60/newMph) - newImpMinutes)/60;
 
         this.setState({
           mph: newMph,
+          impMin: newImpMinutes,
+          impSec: newImpSeconds
+
         })
 
         axios
@@ -100,6 +108,17 @@ export default class App extends React.Component {
     );
   }
 
+  renderMilePacePanel(i) {
+    return(
+      <MilePacePanel
+        minutes={this.state.impMin}
+        seconds={this.state.impSec}
+        onUpClick={function() {alert('up')}}
+        onDownClick={function() {alert('down')}}
+        />
+    );
+  }
+
   renderKphPanel(i) {
     return (
       <KphPanel
@@ -116,6 +135,7 @@ export default class App extends React.Component {
         <div className="treadmill-panels">
           <div className="treadmill-panel">
             {this.renderMphPanel()}
+            {this.renderMilePacePanel()}
           </div>
           <div className="treadmill-panel">
             {this.renderKphPanel()}

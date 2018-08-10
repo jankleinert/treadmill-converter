@@ -38,7 +38,6 @@ ol, ul {
   border-radius: 15px;
 }
 
-
 .treadmill-panel:after {
   clear: both;
   content: "";
@@ -47,6 +46,10 @@ ol, ul {
 
 .treadmill-wrapper {
   display: inline-block;
+}
+
+.treadmill-wrapper.pace {
+  font-size: 24px;
 }
 
 .treadmill-title {
