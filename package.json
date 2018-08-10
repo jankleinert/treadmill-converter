@@ -27,5 +27,6 @@
     "dev": "npm run webpack && nodemon --exec babel-node -- bin/www",
     "postinstall": "npm run webpack",
     "start": "node bin/www"
+
   }
 }
